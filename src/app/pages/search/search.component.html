@@ -1,0 +1,91 @@
+<h1 class="text-center mt-3">IT'S TIME TO FIND YOUR COCKTAIL!</h1>
+<div class="row" style="width: 97vw; margin: auto">
+  <div class="input-group mt-3">
+    <input
+      type="search"
+      class="form-control rounded"
+      placeholder="Search a drink by name"
+      aria-label="Search"
+      aria-describedby="search-addon"
+      name="searchDrink"
+      id="searchDrink"
+      [(ngModel)]="jsonIn.inputDrink"
+    />
+    <button
+      type="button"
+      class="btn btn-dark border border-secondary"
+      [routerLink]="'/search/' + jsonIn.inputDrink"
+    >
+      SEARCH
+    </button>
+  </div>
+
+  <div class="input-group mt-3">
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      [(ngModel)]="jsonIn.inputIngr"
+    >
+      <option value="" disabled selected>Select an ingredient</option>
+      <option *ngFor="let ingredient of ingredients">
+        {{ ingredient.strIngredient1 }}
+      </option>
+    </select>
+    <button
+      class="btn btn-dark border border-secondary"
+      (click)="handleSearchDrinksByIngr()"
+    >
+      SEARCH
+    </button>
+  </div>
+</div>
+
+<div class="row" style="width: 97vw; margin: auto">
+  <div class="col m-2 alert alert-primary" role="alert">
+    Results:
+    <span *ngIf="drinks.length > 0" class="badge text-bg-secondary">{{
+      numOfDrinks
+    }}</span>
+  </div>
+  <div class="col m-2 alert alert-primary" role="alert">
+    <svg
+      class="bi flex-shrink-0 me-2"
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-cart"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+      />
+    </svg>
+    Drink Cart
+  </div>
+</div>
+<!-- LISTA DRINK -->
+<div class="row">
+  <div class="col">
+    <ul class="list-group">
+      <app-drink-li
+        *ngFor="let drink of drinks"
+        [drink]="drink"
+        [showButton]="true"
+        (handleEvent)="handleCartParent(drink, $event)"
+      ></app-drink-li>
+    </ul>
+  </div>
+
+  <!-- LISTA CARRELLO -->
+  <div class="col">
+    <ul class="list-group">
+      <app-drink-li
+        *ngFor="let drink of cartList"
+        [drink]="drink"
+        [showButton]="false"
+      ></app-drink-li>
+    </ul>
+  </div>
+</div>

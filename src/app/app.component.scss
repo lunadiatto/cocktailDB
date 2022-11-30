@@ -1,0 +1,17 @@
+.container {
+  max-width: 100vw;
+  padding: 0;
+}
+
+app-home {
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden !important;
+  width: 99.9vw;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a href="#" class="navbar-brand">
+      <img
+        src="../../../../assets/2022-11-29_16_30_51-Clipboard-removebg-preview.png"
+        height="30"
+        alt="TheCocktailDB"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="'/home'">HOME</a>
+        </li>
+      </ul>
+      <div class="navbar-nav ms-auto">
+        <button class="btn btn-dark" [routerLink]="'/search'">
+          SEARCH A DRINK
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

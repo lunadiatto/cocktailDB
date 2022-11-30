@@ -1,1 +1,118 @@
-HOME
+<h1 class="text-center" style="padding: 1em">Welcome to the CocktailDB</h1>
+
+<div *ngIf="drinks">
+  <h3 class="text-center mb-3">Random cocktail of the day:</h3>
+  <h5 class="text-center">{{ randomDrink.strDrink }}</h5>
+</div>
+<div class="mb-5" style="max-width: fit-content; margin: auto">
+  <div
+    *ngIf="drinks"
+    id="carouselExampleControls"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div
+        class="carousel-item active"
+        role="button"
+        [routerLink]="'/drink/' + randomDrink.idDrink"
+      >
+        <img
+          src="{{ randomDrink.strDrinkThumb }}"
+          style="width: 20rem"
+          alt="{{ randomDrink.strDrink }}"
+        />
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="prev"
+      (click)="randomCocktail()"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="next"
+      (click)="randomCocktail()"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<div class="container" style="display: flex; overflow-x: scroll">
+  <nav aria-label="Page navigation for letters" style="margin: auto">
+    <ul class="pagination justify-content-center">
+      <li
+        class="page-item"
+        role="button"
+        [class.active]="active === letter"
+        *ngFor="let letter of alphabet"
+        [routerLink]="'/home/' + letter"
+      >
+        <a class="page-link" (click)="handleResByLetter(letter)">{{
+          letter
+        }}</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="d-flex flex-row flex-wrap justify-content-between">
+  <div
+    role="button"
+    *ngFor="let drink of searchedDrinks"
+    [routerLink]="'/drink/' + drink['idDrink']"
+  >
+    <div class="card m-2">
+      <img
+        src="{{ drink.strDrinkThumb }}"
+        alt="{{ drink.strDrink }}"
+        style="width: 15rem"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ drink.strDrink }}</h5>
+        <p class="card-text">Bicchiere: {{ drink.strGlass }}</p>
+        <a class="btn btn-dark">Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 *ngIf="drinks" style="text-align: center">
+  {{ numOfDrinks }} cocktails with the letter {{ active }}
+</h4>
+<div
+  class="d-flex flex-row flex-wrap justify-content-between"
+  style="margin: auto"
+>
+  <div
+    *ngFor="let drink of drinks"
+    role="button"
+    [routerLink]="'/drink/' + drink.idDrink"
+    style="width: 15rem; margin: auto"
+  >
+    <div class="card m-2">
+      <img src="{{ drink.strDrinkThumb }}" alt="{{ drink.strDrink }}" />
+      <div class="card-body">
+        <h5 class="card-title">{{ drink.strDrink }}</h5>
+        <p class="card-text">Bicchiere: {{ drink.strGlass }}</p>
+        <a class="btn btn-dark">Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="d-flex flex-row flex-wrap justify-content-between"
+  style="margin: auto"
+  *ngIf="!drinks"
+>
+  <h3 style="margin: auto; padding: 5em">
+    Sorry, there are no cocktails with this letter
+  </h3>
+</div>

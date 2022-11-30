@@ -1,0 +1,25 @@
+<h1 class="text-center m-5">
+  All the drinks with the
+  <span style="text-transform: uppercase">{{ clickedIngr }}</span> ingredient
+</h1>
+<div style="display: flex; justify-content: center; align-content: center">
+  <img [src]="ingredientImage" />
+</div>
+<div class="d-flex flex-row flex-wrap justify-content-between">
+  <div
+    *ngFor="let drink of sameIngrDrinks"
+    role="button"
+    [routerLink]="'/drink/' + drink.id"
+    style="width: 15rem; margin: auto"
+  >
+    <div class="row d-flex flex-row flex-wrap justify-content-between">
+      <div class="card m-2">
+        <img src="{{ drink.image }}" alt="{{ drink.name }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ drink.name }}</h5>
+          <a class="btn btn-dark">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

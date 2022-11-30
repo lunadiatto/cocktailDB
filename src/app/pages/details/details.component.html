@@ -1,0 +1,59 @@
+<section>
+  <div class="container py-4">
+    <h1 class="h1 text-center" id="pageHeaderTitle">
+      <!-- {{ drink.name }} -->
+    </h1>
+
+    <article class="postcard dark blue">
+      <a class="postcard__img_link" href="#">
+        <!-- TODO -->
+        <img
+          class="postcard__img"
+          [src]="drink.strDrinkThumb"
+          [alt]="drink.strDrink"
+        />
+      </a>
+      <div class="postcard__text">
+        <h1 class="postcard__title blue">
+          <a href="#">{{ drink.strDrink }}</a>
+        </h1>
+        <div class="postcard__subtitle">Category: {{ drink.strCategory }}</div>
+        <div class="postcard__subtitle">Glass: {{ drink.strGlass }}</div>
+        <div class="postcard__bar"></div>
+
+        <div class="col postcard__preview-txt">
+          INGREDIENTS
+          <ul>
+            <li
+              *ngFor="let ingr of drink.ingredients"
+              [routerLink]="'/ingredient/' + ingr.name"
+              role="button"
+              style="text-decoration: underline"
+            >
+              {{ ingr.name }}: {{ ingr.measure }}
+            </li>
+          </ul>
+        </div>
+        <div class="col postcard__preview-txt">
+          INSTRUCTIONS
+          <select
+            class="form-select bg-dark text-light"
+            aria-label="Default select example "
+            [(ngModel)]="language"
+            style="width: 5vw; margin: 5px"
+          >
+            <option
+              *ngFor="let langs of instructionsLang"
+              value="{{ langs }}"
+              class="text-light"
+              [attr.selected]="langs == 'EN' ? true : null"
+            >
+              {{ langs }}
+            </option>
+          </select>
+          <p>{{ drink.instructions[language] }}</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

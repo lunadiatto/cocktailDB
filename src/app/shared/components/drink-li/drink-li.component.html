@@ -1,0 +1,39 @@
+<li
+  class="list-group-item d-flex justify-content-between align-items-center m-2"
+  [class.bg-success]="drink.selected && showButton"
+>
+  <img [src]="drink.image + '/preview'" class="img-fluid" [alt]="drink.name" />
+  <div class="m-2">{{ drink.name }}</div>
+  <div *ngIf="showButton">
+    <button
+      type="button"
+      class="btn btn-"
+      style="margin: 5px"
+      [routerLink]="'/drink/' + drink.id"
+    >
+      DETAILS
+    </button>
+    <button
+      type="button"
+      class="btn btn-success"
+      style="margin: 5px"
+      (click)="handleCart(true)"
+      [class.disabled]="drink.selected === true"
+    >
+      ADD
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      style="margin: 5px"
+      (click)="handleCart(false)"
+      [class.disabled]="drink.selected === false"
+    >
+      REMOVE
+    </button>
+  </div>
+  <div class="image-parent"></div>
+  <div *ngIf="!showButton">
+    <h5>ADDED TO CART</h5>
+  </div>
+</li>
